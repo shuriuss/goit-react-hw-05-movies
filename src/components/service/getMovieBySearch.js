@@ -7,10 +7,10 @@ const API_KEY = '39fe5b73f599338374afe8e26b8126d9';
 
 
 
-export const fetchMovie = async (page, search) => {
+export const getMovieBySearch = async (search, page=1,) => {
  
   try {
-    const URL = `${BASE_URL}?api_key=${API_KEY}&page=${page}&query=${search}`
+    const URL = `${BASE_URL}api_key=${API_KEY}&page=${page}&query=${search}`
     const r = await axios.get(URL);
     return r.data;
   } catch (error) {

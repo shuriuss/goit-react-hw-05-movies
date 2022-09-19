@@ -1,4 +1,4 @@
-import { fetchTrending } from '../components/service/fetchTrending';
+import { fetchTrending } from '../../components/service/fetchTrending';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -13,16 +13,16 @@ export const Home = () => {
     });
   }, []);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <main>
       <h1>Trending today</h1>
       <ul>
-        {data.map(item => {
+        {data.map(({id, title}) => {
             return (
-            <li key={item.id}>
-              <Link to={`${item.id}`}>{item.title}</Link>;
+            <li key={id}>
+              <Link to={`${id}`}>{title}</Link>;
             </li>
           );
         })}

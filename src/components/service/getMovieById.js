@@ -7,7 +7,7 @@ const API_KEY = '39fe5b73f599338374afe8e26b8126d9';
 
 
 
-export const fetchMovieId = async (id) => {
+export const getMovieById = async (id) => {
  
   try {
     // const URL = `${BASE_URL}?q=${search}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=${PER_PAGE}`;
