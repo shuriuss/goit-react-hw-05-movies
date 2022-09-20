@@ -1,8 +1,9 @@
 import { fetchTrending } from '../../components/service/fetchTrending';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
-export const Home = () => {
+ const Home = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export const Home = () => {
         {data.map(({id, title}) => {
             return (
             <li key={id}>
-              <Link to={`${id}`}>{title}</Link>;
+              <Link to={`/movies/${id}`}>{title}</Link>;
             </li>
           );
         })}
@@ -30,3 +31,13 @@ export const Home = () => {
     </main>
   );
 };
+
+
+Home.propTypes={
+  data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  })
+}
+
+export default Home

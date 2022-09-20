@@ -1,25 +1,62 @@
 import { useState, useEffect } from 'react';
-import { getMoviCredits } from '../service/getMovieCredits ';
 import { useParams } from 'react-router-dom';
 
+import { getMoviCredits } from '../service/getMovieCredits ';
+import PropTypes from 'prop-types'
 
-// const id = 272;
 
-export const Cast = () => {
-  const [data, setData] = useState({});
+const Cast = () => {
   const { id } = useParams();
+  const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    
-    getMoviCredits(id).then(r => {
-      setData(() => {
-        return r;
-      });
-    });
-  }, [id]);
+    getMoviCredits(id)
+      .then(r => {
+        if (cast.length) {
+          return;
+        }
+        setCast(() => {
+          return [...r.cast]
+        })
+      })
+      
+  }, [id, cast]);
 
-  console.log(data);
+  console.log(cast);
+
+  if (!cast.length) {
+    return;
+  }
+
   return (
-    <h3>hello</h3>
-  )
+    <>
+      <h3>Cast</h3>
+      <ul>
+        {cast.map(({ character, id, original_name, profile_path }) => (
+          <li key={id}>
+            {profile_path && (
+              <img
+                width="120"
+                src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                alt={original_name}
+              />
+            )}
+            <p>{original_name}</p>
+            <p>{character}</p>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 };
+
+Cast.propTypes = {
+  cast: PropTypes.shape({
+    character: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    original_name: PropTypes.string.isRequired,
+    profile_path: PropTypes.string.isRequired,
+  })
+  }
+
+export default Cast;
