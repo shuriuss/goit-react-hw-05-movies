@@ -21,7 +21,7 @@ export const App = () => {
 };
 
   return (
-    <container>
+    <div>
       <header>
         <nav className={s.nav}>
           <NavLink className={getActiveClassName} to="/" end>
@@ -44,6 +44,6 @@ export const App = () => {
         </Routes>
         </Suspense>
       </div>
-    </container>
+    </div>
   );
 };
