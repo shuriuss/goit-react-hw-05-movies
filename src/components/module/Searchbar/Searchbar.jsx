@@ -40,7 +40,7 @@ export function Searchbar() {
         value={query}
       />
       <button type="submit" className={s.button}>
-        <span className={s.buttonlabel}>Search</span>
+        Search
       </button>
     </form>
   );

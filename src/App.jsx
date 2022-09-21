@@ -1,11 +1,7 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
-// import { Home } from './pages/Home/Home';
-// import { Movies } from './pages/Movies/Movies';
-// import { MovieDetails } from './pages/MovieDetails/MovieDetails';
-// import {Cast} from './components/module/Cast';
-// import { Reviews } from 'components/module/Reviews';
 import { lazy, Suspense} from 'react'
 import { Watch } from 'react-loader-spinner'
+import s from './App.module.css'
 
 
 
@@ -19,14 +15,19 @@ const Reviews = lazy(()=> import('components/module/Reviews'))
 
 
 export const App = () => {
+
+  const getActiveClassName = ({ isActive }) => {
+    return isActive ? `${s.link} ${s.active}` : s.link;
+};
+
   return (
     <container>
       <header>
-        <nav>
-          <NavLink to="/" end>
+        <nav className={s.nav}>
+          <NavLink className={getActiveClassName} to="/" end>
             Home
           </NavLink>
-          <NavLink to="/movies">Movies</NavLink>
+          <NavLink className={getActiveClassName} to="/movies">Movies</NavLink>
         </nav>
       </header>
 

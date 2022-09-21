@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { getMoviCredits } from '../service/getMovieCredits ';
 import PropTypes from 'prop-types'
+import s from './Cast.module.css'
 
 
 const Cast = () => {
@@ -31,9 +32,9 @@ const Cast = () => {
   return (
     <>
       <h3>Cast</h3>
-      <ul>
+      <ul className={s.list}>
         {cast.map(({ character, id, original_name, profile_path }) => (
-          <li key={id}>
+          <li key={id} className={s.item}>
             {profile_path && (
               <img
                 width="120"

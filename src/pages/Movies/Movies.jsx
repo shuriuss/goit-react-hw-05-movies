@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getMovieBySearch } from '../../components/service/getMovieBySearch';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import s from './Movies.module.css'
 
 const Movies = () => {
   const [data, setData] = useState([]);
@@ -30,13 +31,13 @@ const Movies = () => {
   return (
     <main>
       <Searchbar />
-
-      <ul>
+<div>
+      <ul className={s.list}>
         {data.length > 0 &&
           data.map(({ id, title }) => {
             return (
-              <li key={id}>
-                <Link to={`${id}`} state={{ from: location }}>
+              <li key={id} className={s.item}>
+                <Link to={`${id}`} state={{ from: location }} className={s.link}>
                   {title}
                 </Link>
                 ;
@@ -44,6 +45,7 @@ const Movies = () => {
             );
           })}
       </ul>
+      </div>
     </main>
   );
 };

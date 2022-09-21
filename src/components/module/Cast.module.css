@@ -1,0 +1,11 @@
+/* .list {
+    display: flex;
+}
+
+
+.item {
+    margin-right: 10px;
+    list-style: none;
+    width: calc(100%/5);
+    flex-wrap: wrap
+} */

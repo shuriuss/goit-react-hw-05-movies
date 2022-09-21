@@ -1,10 +1,10 @@
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { getMovieById } from '../../components/service/getMovieById';
 import { useState, useEffect } from 'react';
-import { Suspense} from 'react'
-import { Watch } from 'react-loader-spinner'
-import PropTypes from 'prop-types'
-
+import { Suspense } from 'react';
+import { Watch } from 'react-loader-spinner';
+import PropTypes from 'prop-types';
+import s from './MovieDetails.module.css';
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -20,7 +20,6 @@ const MovieDetails = () => {
     });
   }, [movie, id]);
 
-
   const {
     original_title,
     release_date,
@@ -31,20 +30,24 @@ const MovieDetails = () => {
   } = movie;
 
 
+
   return (
     <main>
-      <Link to={location.state?.from ?? '/movies'}>Go to back</Link>
-      {/* <button to='movies'>Go to back</button> */}
-      <div>
-        <img
+      <Link to={location.state?.from ?? '/movies'} className={s.button}>
+        Go to back
+      </Link>
+      <div className={s.box}>
+        {poster_path && <img
           src={`https://image.tmdb.org/t/p/w500${poster_path}`}
           alt={original_title}
           width={300}
           height={400}
-        />
-        <div>
+          
+        />}
+        
+        <div className={s.info}>
           <h2>
-            {original_title} {release_date}
+            {original_title} {release_date && release_date.slice(0, 4)}
           </h2>
           <p>User score: {Math.floor(popularity)}%</p>
           <h3>Overview</h3>
@@ -58,28 +61,23 @@ const MovieDetails = () => {
             </ul>
           )}
         </div>
-        <div>
-          <Link to="cast" state={location.state?.from ? location.state : null}>
-            Cast
-          </Link>
+      </div>
+      <div className={s.box__link}>
+        <Link to="cast" state={location.state?.from ? location.state : null} className={s.link}>
+          Cast
+        </Link>
 
-          <Link
-            to="reviews"
-            state={location.state?.from ? location.state : null}
-          >
-            Reviews
-          </Link>
-          <Suspense fallback={<Watch/>}></Suspense>
-          <Outlet />
-        </div>
+        <Link to="reviews" state={location.state?.from ? location.state : null} className={s.link}>
+          Reviews
+        </Link>
+        <Suspense fallback={<Watch />}></Suspense>
+        <Outlet />
       </div>
     </main>
   );
 };
 
-
-
-MovieDetails.propTypes={
+MovieDetails.propTypes = {
   movie: PropTypes.shape({
     original_title: PropTypes.string.isRequired,
     release_date: PropTypes.string.isRequired,
@@ -89,7 +87,6 @@ MovieDetails.propTypes={
     poster_path: PropTypes.string.isRequired,
   }),
   id: PropTypes.string,
-}
+};
 
-
-export default MovieDetails
+export default MovieDetails;

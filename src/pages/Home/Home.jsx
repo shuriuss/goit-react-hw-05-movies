@@ -2,6 +2,7 @@ import { fetchTrending } from '../../components/service/fetchTrending';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
+import s from '../Home/Home.module.css'
 
  const Home = () => {
   const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ import PropTypes from 'prop-types'
 
   return (
     <main>
-      <h1>Trending today</h1>
+      <h1 className={s.title}>Trending today</h1>
       <ul>
         {data.map(({id, title}) => {
             return (
